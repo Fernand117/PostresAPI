@@ -1,0 +1,6 @@
+@Postres.Aplicacion_HostAddress = http://localhost:5195
+
+GET {{Postres.Aplicacion_HostAddress}}/api/Categorias
+Accept: application/json
+
+###
