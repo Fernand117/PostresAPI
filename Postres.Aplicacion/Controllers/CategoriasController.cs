@@ -31,11 +31,26 @@ namespace Postres.Aplicacion.Controllers
             return new OkObjectResult(result);
         }
 
+        [HttpGet("nombre/{nombre}")]
+        public async Task<IActionResult> GetCategoriaByName(string nombre)
+        {
+            var result = await _categoriasCommand.GetCategoriaById(nombre);
+            return new OkObjectResult(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> SaveCategoria([FromBody] Categoria request)
         {
             var validator = Validator(request);
             var result = await _categoriasCommand.GuardarCategoria(validator!);
+            return new OkObjectResult(result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCategoria([FromBody] Categoria request)
+        {
+            var validator = Validator(request);
+            var result = await _categoriasCommand.ActualizarCategoria(validator);
             return new OkObjectResult(result);
         }
 

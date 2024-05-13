@@ -14,14 +14,25 @@ namespace Postres.Funciones.Categorias
             _dbContext = postresDBContext ?? throw new ArgumentException(nameof(_dbContext));
         }
 
-        public Task<ResultAPI> ActualizarCategoria(CategoriasCommandHandlerValidator categoria)
+        public async Task<ResultAPI> ActualizarCategoria(CategoriasCommandHandlerValidator categoria)
         {
-            throw new NotImplementedException();
+            var cCategoria = await _dbContext.Categorias.Where(c => c.Nombre == categoria.Nombre).FirstOrDefaultAsync();
+            if (cCategoria == null) return ResultAPI.Ok($"La categoria con nombre {categoria.Nombre} no se encuentra en la db.");
+
+            cCategoria.Nombre = categoria.Nombre;
+            cCategoria.UrlFoto = categoria.UrlFoto;
+
+            _dbContext.Update(cCategoria);
+            await _dbContext.SaveChangesAsync();
+            return ResultAPI.Ok(cCategoria, $"Categoria {cCategoria.Nombre} actualizada.");
         }
 
         public async Task<ResultAPI> EliminarCategoria(string nombre)
         {
             var categoria = await _dbContext.Categorias.Where(c => c.Nombre == nombre).FirstOrDefaultAsync();
+
+            if (categoria == null) return ResultAPI.Ok($"La categoria {nombre} no existe en la db.");
+
             _dbContext.Remove(categoria);
             await _dbContext.SaveChangesAsync();
 
