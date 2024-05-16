@@ -46,11 +46,11 @@ namespace Postres.Aplicacion.Controllers
             return new OkObjectResult(result);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateCategoria([FromBody] Categoria request)
+        [HttpPut("actualizar/{nombre}")]
+        public async Task<IActionResult> UpdateCategoria([FromBody] Categoria request, string nombre)
         {
             var validator = Validator(request);
-            var result = await _categoriasCommand.ActualizarCategoria(validator);
+            var result = await _categoriasCommand.ActualizarCategoria(validator, nombre);
             return new OkObjectResult(result);
         }
 
