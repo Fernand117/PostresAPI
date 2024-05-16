@@ -10,6 +10,8 @@ public class PostresDBContext : DbContext
     #region DBSETs
     public virtual DbSet<Categoria> Categorias { get; set; }
     public virtual DbSet<Receta> Recetas { get; set; }
+    public virtual DbSet<Usuario> Usuarios { get; set; }
+    public virtual DbSet<DatosUsuario> DatosUsuarios { get; set; }
     #endregion
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
