@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Postres.Infraestructura\Postres.Infraestructura.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Recetas\" />
+  </ItemGroup>
+
 </Project>

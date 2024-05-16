@@ -1,11 +1,19 @@
 ﻿using Postres.Domain.Categorias;
+using Postres.Domain.Usuarios;
 
 namespace Postres.Domain.Recetas
 {
     public class Receta
     {
-        public int Id { get; set; }
-        public string Titulo { get; set; }
-        public List<Categoria> Categorias { get; set; }
+        public Guid Id { get; set; }
+        public string Titulo { get; set; } = string.Empty;
+        public string Descripcion { get; set; } = string.Empty;
+        public string Cuerpo { get; set; } = string.Empty;
+        public string Etiquetas { get; set; } = string.Empty;
+        public Guid IdAutor { get; set; }
+        public Guid IdCategoria { get; set; }
+
+        public virtual Categoria? IdCategoriaNavigation { get; set; }
+        public virtual Usuario? IdUsuarioNavigation { get; set; }
     }
 }
