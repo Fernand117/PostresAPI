@@ -1,4 +1,5 @@
-﻿using Postres.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using Postres.Domain;
 using Postres.Domain.Recetas;
 using Postres.Infraestructura.APIServices;
 
@@ -13,24 +14,53 @@ namespace Postres.Funciones.Recetas
             _dbContext = dBContext ?? throw new ArgumentException(nameof(_dbContext));
         }
 
-        public Task<ResultAPI> ActualizarReceta(RecetasCommandHandlerValidator validator, string nombre)
+        public async Task<ResultAPI> ActualizarReceta(RecetasCommandHandlerValidator validator, string nombre)
         {
-            throw new NotImplementedException();
+            var receta = await _dbContext.Recetas.Where(r => r.Titulo == nombre).FirstOrDefaultAsync();
+
+            if (receta == null) return ResultAPI.Ok($"No se encontró ninguna receta llamada {nombre}");
+
+            receta.Titulo = validator.Titulo;
+            receta.Descripcion = validator.Descripcion;
+            receta.Cuerpo = validator.Cuerpo;
+            receta.Etiquetas = validator.Etiquetas;
+            receta.IdAutor = validator.IdAutor;
+            receta.IdCategoria = validator.IdCategoria;
+            
+            _dbContext.Update(receta);
+            await _dbContext.SaveChangesAsync();
+
+            return ResultAPI.Ok($"Receta {nombre} actualizada correctamente");
         }
 
-        public Task<ResultAPI> EliminarCategoria(string nombre)
+        public async Task<ResultAPI> EliminarReceta(string nombre)
         {
-            throw new NotImplementedException();
+            var receta = await _dbContext.Recetas.Where(r => r.Titulo == nombre).FirstOrDefaultAsync();
+
+            if (receta == null) return ResultAPI.Ok($"No se encontró ninguna receta llamada {nombre}");
+
+            _dbContext.Remove(receta);
+            await _dbContext.SaveChangesAsync();
+
+            return ResultAPI.Ok($"Receta {nombre} eliminada correctamente");
         }
 
-        public Task<ResultAPI> GetListRecetas()
+        public async Task<ResultAPI> GetListRecetas()
         {
-            throw new NotImplementedException();
+            var listaRecetas = await _dbContext.Recetas.ToListAsync();
+            
+            if (listaRecetas == null) return ResultAPI.Ok("No se encontró ninguna receta");
+            
+            return ResultAPI.Ok(listaRecetas, "Lista de recetas");
         }
 
-        public Task<ResultAPI> GetRecetaByName(string name)
+        public async Task<ResultAPI> GetRecetaByName(string name)
         {
-            throw new NotImplementedException();
+            var receta = await _dbContext.Recetas.Where(r => r.Titulo == name).FirstOrDefaultAsync();
+            
+            if (receta == null) return ResultAPI.Ok($"No se encontró ninguna receta {name}");
+
+            return ResultAPI.Ok(receta, "Receta encontrada");
         }
 
         public async Task<ResultAPI> GuardarReceta(RecetasCommandHandlerValidator validator)
