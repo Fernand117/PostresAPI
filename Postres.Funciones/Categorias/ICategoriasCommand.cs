@@ -1,5 +1,4 @@
-﻿using Postres.Domain.Categorias;
-using Postres.Infraestructura.APIServices;
+﻿using Postres.Infraestructura.APIServices;
 
 namespace Postres.Funciones.Categorias
 {
