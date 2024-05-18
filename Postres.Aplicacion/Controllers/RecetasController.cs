@@ -44,5 +44,20 @@ namespace Postres.Aplicacion.Controllers
             var result = await _recetasCommand.GuardarReceta(validator);
             return new OkObjectResult(result);
         }
+
+        [HttpPut("nombre/{nombre}")]
+        public async Task<IActionResult> UpdateReceta([FromBody] Receta receta, string nombre)
+        {
+            var validator = Validator(receta);
+            var result = await _recetasCommand.ActualizarReceta(validator, nombre);
+            return new OkObjectResult(result);
+        }
+
+        [HttpDelete("nombre/{nombre}")]
+        public async Task<IActionResult> DeleteReceta(string nombre)
+        {
+            var result = await _recetasCommand.EliminarReceta(nombre);
+            return new OkObjectResult(result);
+        }
     }
 }
