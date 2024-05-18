@@ -5,6 +5,7 @@ namespace Postres.Domain.Categorias;
 
 public class Categoria
 {
+    [Key]
     public Guid Id { get; set; }
     public string Nombre { get; set; } = string.Empty;
     public string UrlFoto { get; set; } = string.Empty;

@@ -1,7 +1,10 @@
-﻿namespace Postres.Domain.Usuarios
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Postres.Domain.Usuarios
 {
     public class DatosUsuario
     {
+        [Key]
         public Guid Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
         public string Paterno { get; set; } = string.Empty;

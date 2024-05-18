@@ -1,6 +1,7 @@
 using Microsoft.OpenApi.Models;
 using Postres.Domain;
 using Postres.Funciones.Categorias;
+using Postres.Funciones.Recetas;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddScoped<ICategoriasCommand, CategoriasCommandHandler>();
+builder.Services.AddScoped<IRecetasCommand, RecetasCommandHandler>();
 
 var app = builder.Build();
 

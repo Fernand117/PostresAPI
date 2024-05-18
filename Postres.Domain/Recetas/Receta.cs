@@ -1,10 +1,12 @@
 ﻿using Postres.Domain.Categorias;
 using Postres.Domain.Usuarios;
+using System.ComponentModel.DataAnnotations;
 
 namespace Postres.Domain.Recetas
 {
     public class Receta
     {
+        [Key]
         public Guid Id { get; set; }
         public string Titulo { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
