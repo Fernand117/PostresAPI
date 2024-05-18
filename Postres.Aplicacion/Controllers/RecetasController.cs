@@ -20,5 +20,12 @@ namespace Postres.Aplicacion.Controllers
             var result = await _recetasCommand.GetListRecetas();
             return new OkObjectResult(result);
         }
+
+        [HttpGet("nombre/{nombre}")]
+        public async Task<IActionResult> GetByName(string name)
+        {
+            var result = await _recetasCommand.GetRecetaByName(name);
+            return new OkObjectResult(result);
+        }
     }
 }
