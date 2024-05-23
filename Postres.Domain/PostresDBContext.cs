@@ -26,7 +26,7 @@ public class PostresDBContext : DbContext
         modelBuilder.Entity<Categoria>(entity =>
         {
             entity.HasKey(c => c.Id).HasName("PK_IdCategoria");
-            entity.Property(c => c.Id).HasColumnName("IdCategoria").ValueGeneratedOnAdd().UseIdentityByDefaultColumn();
+            entity.Property(c => c.Id).HasColumnName("IdCategoria").ValueGeneratedOnAdd();
 
             entity.ToTable("Categorias");
 
@@ -37,7 +37,7 @@ public class PostresDBContext : DbContext
         modelBuilder.Entity<Receta>(entity =>
         {
             entity.HasKey(r => r.Id).HasName("PK_IdReceta");
-            entity.Property(r => r.Id).HasColumnName("IdReceta").ValueGeneratedOnAdd().UseIdentityByDefaultColumn();
+            entity.Property(r => r.Id).HasColumnName("IdReceta").ValueGeneratedOnAdd();
 
             entity.ToTable("Recetas");
 
@@ -55,7 +55,7 @@ public class PostresDBContext : DbContext
         modelBuilder.Entity<Usuario>(entity =>
         {
             entity.HasKey(u => u.Id).HasName("PK_IdUsuario");
-            entity.Property(u => u.Id).HasColumnName("IdUsuario").ValueGeneratedOnAdd().UseIdentityByDefaultColumn();
+            entity.Property(u => u.Id).HasColumnName("IdUsuario").ValueGeneratedOnAdd();
 
             entity.ToTable("Usuarios");
 
@@ -67,7 +67,7 @@ public class PostresDBContext : DbContext
         modelBuilder.Entity<DatosUsuario>(entity =>
         {
             entity.HasKey(u => u.Id).HasName("PK_IdDatosUsuario");
-            entity.Property(u => u.Id).HasColumnName("IdDatosUsuario").ValueGeneratedOnAdd().UseIdentityByDefaultColumn();
+            entity.Property(u => u.Id).HasColumnName("IdDatosUsuario").ValueGeneratedOnAdd();
 
             entity.ToTable("DatosUsuarios");
 
