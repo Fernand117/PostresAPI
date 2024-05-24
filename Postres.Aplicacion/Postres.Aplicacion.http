@@ -4,3 +4,5 @@ GET {{Postres.Aplicacion_HostAddress}}/api/Categorias
 Accept: application/json
 
 ###
+GET {{Postres.Aplicacion_HostAddress}}/api/Recetas
+Accept: application/json
