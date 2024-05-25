@@ -28,7 +28,22 @@ namespace Postres.Aplicacion.Controllers
         {
             var validator = Validator(usuario);
             var result = await _usuariosCommand.Login(validator);
-            return new OkObjectResult(usuario);
+            return new OkObjectResult(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAccount([FromBody] Usuario usuario)
+        {
+            var validator = Validator(usuario);
+            var result = await _usuariosCommand.SaveUsuario(validator);
+            return new OkObjectResult(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsuarios()
+        {
+            var result = await _usuariosCommand.GetAllUsers();
+            return new OkObjectResult(result);
         }
     }
 }
