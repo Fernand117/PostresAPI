@@ -16,6 +16,10 @@ builder.Services.AddDbContext<PostresDBContext>();
 
 builder.Services.AddMvc();
 
+builder.Services.AddScoped<ICategoriasCommand, CategoriasCommandHandler>();
+builder.Services.AddScoped<IRecetasCommand, RecetasCommandHandler>();
+builder.Services.AddScoped<IUsuariosCommand, UsuariosCommandHandler>();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -25,10 +29,6 @@ builder.Services.AddSwaggerGen(c =>
         Description = "Mapeo de los endpoints que componen esta API"
     });
 });
-
-builder.Services.AddScoped<ICategoriasCommand, CategoriasCommandHandler>();
-builder.Services.AddScoped<IRecetasCommand, RecetasCommandHandler>();
-builder.Services.AddScoped<IUsuariosCommand, UsuariosCommandHandler>();
 
 var app = builder.Build();
 

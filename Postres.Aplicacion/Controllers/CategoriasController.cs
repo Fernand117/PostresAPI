@@ -14,7 +14,6 @@ namespace Postres.Aplicacion.Controllers
         public CategoriasController(ICategoriasCommand categoriasCommand)
         {
             _categoriasCommand = categoriasCommand ?? throw new ArgumentException(nameof(categoriasCommand));
-
         }
 
         private CategoriasCommandHandlerValidator Validator(Categoria categoria)

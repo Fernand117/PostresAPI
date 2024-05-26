@@ -16,7 +16,7 @@ namespace Postres.Aplicacion.Controllers
             _usuariosCommand = usuariosCommand ?? throw new ArgumentException(nameof(usuariosCommand));
         }
 
-        public UsuariosCommandHandlerValidator Validator(Usuario usuario)
+        private UsuariosCommandHandlerValidator Validator(Usuario usuario)
         {
             var serReq = JsonConvert.SerializeObject(usuario);
             var validator = JsonConvert.DeserializeObject<UsuariosCommandHandlerValidator>(serReq);
