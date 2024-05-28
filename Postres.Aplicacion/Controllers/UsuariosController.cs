@@ -45,5 +45,27 @@ namespace Postres.Aplicacion.Controllers
             var result = await _usuariosCommand.GetAllUsers();
             return new OkObjectResult(result);
         }
+
+        [HttpGet("usuario/{usuario}")]
+        public async Task<IActionResult> GetUsuarioByName(string usuario)
+        {
+            var result = await _usuariosCommand.GetUsersByName(usuario);
+            return new OkObjectResult(result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateUsuario([FromBody] Usuario usuario, string nombre)
+        {
+            var validator = Validator(usuario);
+            var result = await _usuariosCommand.UpdateUsuario(validator, nombre);
+            return new OkObjectResult(result);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUsuario(string nombre)
+        {
+            var result = await _usuariosCommand.DeleteUsuario(nombre);
+            return new OkObjectResult(result);
+        }
     }
 }
