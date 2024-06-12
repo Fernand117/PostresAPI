@@ -14,9 +14,14 @@ namespace Postres.Funciones.DatosUsuarios
             _postresDBContext = postresDBContext ?? throw new ArgumentException(nameof(postresDBContext));
         }
 
-        public Task<ResultAPI> DeleteDataUser(string usuario)
+        public async Task<ResultAPI> DeleteDataUser(string usuario)
         {
-            throw new NotImplementedException();
+            var getUsuario = await _postresDBContext.DatosUsuarios.Where(d => d.Nombre == usuario).FirstOrDefaultAsync();
+
+            _postresDBContext.Remove(getUsuario);
+            await _postresDBContext.SaveChangesAsync();
+
+            return ResultAPI.Ok($"Detalles del usuario {usuario} eliminados");
         }
 
         public async Task<ResultAPI> GetAllDataUsers()
@@ -39,7 +44,7 @@ namespace Postres.Funciones.DatosUsuarios
 
         public async Task<ResultAPI> SaveData(DatosUsuariosCommandHandlerValidator datosValidator)
         {
-            DatosUsuario dtUsuario = new DatosUsuario() 
+            DatosUsuario dtUsuario = new DatosUsuario()
             {
                 Id = Guid.NewGuid(),
                 IdUsuario = datosValidator.IdUsuario,
