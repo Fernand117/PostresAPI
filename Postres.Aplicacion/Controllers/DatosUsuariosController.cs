@@ -1,10 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Postres.Domain.Categorias;
 using Postres.Domain.Usuarios;
-using Postres.Funciones.Categorias;
 using Postres.Funciones.DatosUsuarios;
-using Postres.Funciones.Usuarios;
 
 namespace Postres.Aplicacion.Controllers
 {
