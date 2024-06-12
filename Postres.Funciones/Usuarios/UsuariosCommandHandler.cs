@@ -67,8 +67,7 @@ namespace Postres.Funciones.Usuarios
 
         public async Task<ResultAPI> UpdateUsuario(UsuariosCommandHandlerValidator usuario, string nombre)
         {
-            var usuarioCons = await _postresDbContext.Usuarios.Where(u => u.NombreUsuario == nombre)
-                .FirstOrDefaultAsync();
+            var usuarioCons = await _postresDbContext.Usuarios.Where(u => u.NombreUsuario == nombre).FirstOrDefaultAsync();
 
             if (usuarioCons == null) return ResultAPI.Ok($"No existe el usuario {nombre}");
 

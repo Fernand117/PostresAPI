@@ -18,6 +18,8 @@ namespace Postres.Funciones.DatosUsuarios
         {
             var getUsuario = await _postresDBContext.DatosUsuarios.Where(d => d.Nombre == usuario).FirstOrDefaultAsync();
 
+            if (getUsuario == null) return ResultAPI.Ok("No existe ningún detalle del usuario");
+
             _postresDBContext.Remove(getUsuario);
             await _postresDBContext.SaveChangesAsync();
 
@@ -65,6 +67,8 @@ namespace Postres.Funciones.DatosUsuarios
         public async Task<ResultAPI> UpdatDataUser(DatosUsuariosCommandHandlerValidator datosValidator, string usuario)
         {
             var getUsuario = await _postresDBContext.DatosUsuarios.Where(d => d.Nombre == usuario).FirstOrDefaultAsync();
+
+            if (getUsuario == null) return ResultAPI.Ok("Aún no hay detalles del usuario registrados");
 
             getUsuario.Nombre = datosValidator.Nombre;
             getUsuario.Paterno = datosValidator.Paterno;
