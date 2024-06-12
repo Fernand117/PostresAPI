@@ -1,6 +1,7 @@
 using Microsoft.OpenApi.Models;
 using Postres.Domain;
 using Postres.Funciones.Categorias;
+using Postres.Funciones.DatosUsuarios;
 using Postres.Funciones.Recetas;
 using Postres.Funciones.Usuarios;
 
@@ -19,6 +20,7 @@ builder.Services.AddMvc();
 builder.Services.AddScoped<ICategoriasCommand, CategoriasCommandHandler>();
 builder.Services.AddScoped<IRecetasCommand, RecetasCommandHandler>();
 builder.Services.AddScoped<IUsuariosCommand, UsuariosCommandHandler>();
+builder.Services.AddScoped<IDatosUsuariosCommand, DatosUsuariosCommandHandler>();
 
 builder.Services.AddSwaggerGen(c =>
 {
