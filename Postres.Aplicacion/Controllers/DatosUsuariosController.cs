@@ -44,5 +44,20 @@ namespace Postres.Aplicacion.Controllers
             var result = await _usuariosCommand.SaveData(validator);
             return new OkObjectResult(result);
         }
+
+        [HttpPut("update/{usuario}")]
+        public async Task<IActionResult> UpdateUsuarioDetails([FromBody] DatosUsuario datos, string usuario)
+        {
+            var validator = Validator(datos);
+            var result = await _usuariosCommand.UpdatDataUser(validator, usuario);
+            return new OkObjectResult(result);
+        }
+
+        [HttpDelete("del/{usuario}")]
+        public async Task<IActionResult> DeleteUsersDetails(string usuario)
+        {
+            var result = await _usuariosCommand.DeleteDataUser(usuario);
+            return new OkObjectResult(result);
+        }
     }
 }
