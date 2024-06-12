@@ -62,9 +62,21 @@ namespace Postres.Funciones.DatosUsuarios
             return ResultAPI.Ok(dtUsuario, "Detalles del perfil de usuario guardado correctamente");
         }
 
-        public Task<ResultAPI> UpdatDataUser(DatosUsuariosCommandHandlerValidator datosValidator, string usuario)
+        public async Task<ResultAPI> UpdatDataUser(DatosUsuariosCommandHandlerValidator datosValidator, string usuario)
         {
-            throw new NotImplementedException();
+            var getUsuario = await _postresDBContext.DatosUsuarios.Where(d => d.Nombre == usuario).FirstOrDefaultAsync();
+
+            getUsuario.Nombre = datosValidator.Nombre;
+            getUsuario.Paterno = datosValidator.Paterno;
+            getUsuario.Materno = datosValidator.Materno;
+            getUsuario.FechaNacimiento = datosValidator.FechaNacimiento;
+            getUsuario.FotoPerfil = datosValidator.FotoPerfil;
+            getUsuario.FotoPortada = datosValidator.FotoPortada;
+
+            _postresDBContext.Update(getUsuario);
+            await _postresDBContext.SaveChangesAsync();
+
+            return ResultAPI.Ok("Detalles del usuario actualizados correctamente")
         }
     }
 }
