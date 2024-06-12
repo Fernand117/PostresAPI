@@ -76,7 +76,7 @@ namespace Postres.Funciones.DatosUsuarios
             _postresDBContext.Update(getUsuario);
             await _postresDBContext.SaveChangesAsync();
 
-            return ResultAPI.Ok("Detalles del usuario actualizados correctamente")
+            return ResultAPI.Ok("Detalles del usuario actualizados correctamente");
         }
     }
 }
