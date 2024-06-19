@@ -69,10 +69,12 @@ namespace Postres.Funciones.Recetas
             List<RecetaDTO> listaRecetasCategorias = new List<RecetaDTO>();
             var recetaAll = await _dbContext.Recetas.ToListAsync();
 
+            if (recetaAll == null) return ResultAPI.Ok("No hay recetas");
+
             foreach (var recetaItem in recetaAll)
             {
                 var categoriaCons = await _dbContext.Categorias.Where(c => c.Id == recetaItem.IdCategoria).FirstOrDefaultAsync();
-                var autorConsulta = await _dbContext.Usuarios.Where(u => u.Id == recetaItem.IdAutor).FirstOrDefaultAsync();
+                var autorConsulta = await _dbContext.DatosUsuarios.Where(u => u.Id == recetaItem.IdAutor).FirstOrDefaultAsync();
                 listaRecetasCategorias.Add(new RecetaDTO()
                 {
                     Titulo = recetaItem.Titulo,
@@ -80,12 +82,11 @@ namespace Postres.Funciones.Recetas
                     Cuerpo = recetaItem.Cuerpo,
                     Etiquetas = recetaItem.Etiquetas,
                     Categoria = categoriaCons!.Nombre,
-                    Autor = autorConsulta!.NombreUsuario
+                    Autor = autorConsulta!.Nombre + " " + autorConsulta!.Paterno
                 });
             }
 
-            return ResultAPI.Ok(listaRecetasCategorias);
-
+            return ResultAPI.Ok(listaRecetasCategorias, "Lista de recetas");
         }
 
         public async Task<ResultAPI> GuardarReceta(RecetasCommandHandlerValidator validator)
