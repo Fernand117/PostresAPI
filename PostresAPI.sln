@@ -17,7 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Postres.Aplicacion", "Postr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Postres.Funciones", "Postres.Funciones\Postres.Funciones.csproj", "{AC54BA72-073E-4ACA-A9A7-077EB78C885B}"
 EndProject
+<<<<<<< HEAD
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Postres.Infraestructura", "Postres.Infraestructura\Postres.Infraestructura.csproj", "{4273EACF-3FBA-435F-A1A9-AB06F87E5578}"
+=======
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Postres.Infraestructura", "Postres.Infraestructura\Postres.Infraestructura.csproj", "{4273EACF-3FBA-435F-A1A9-AB06F87E5578}"
+>>>>>>> master
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

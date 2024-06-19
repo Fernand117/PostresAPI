@@ -1,0 +1,10 @@
+@Postres.Aplicacion_HostAddress = http://localhost:5195
+
+GET {{Postres.Aplicacion_HostAddress}}/api/Categorias
+Accept: application/json
+
+GET {{Postres.Aplicacion_HostAddress}}/api/Recetas
+Accept: application/json
+
+GET {{Postres.Aplicacion_HostAddress}}/api/Usuarios
+Accept: application/json
