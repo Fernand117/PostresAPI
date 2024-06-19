@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Postres.Domain;
+using Postres.Domain.DTO;
 using Postres.Domain.Recetas;
 using Postres.Infraestructura.APIServices;
 
@@ -61,6 +62,30 @@ namespace Postres.Funciones.Recetas
             if (receta == null) return ResultAPI.Ok($"No se encontró ninguna receta {name}");
 
             return ResultAPI.Ok(receta, "Receta encontrada");
+        }
+
+        public async Task<ResultAPI> GetRecetaWithCategoria()
+        {
+            List<RecetaDTO> listaRecetasCategorias = new List<RecetaDTO>();
+            var recetaAll = await _dbContext.Recetas.ToListAsync();
+
+            foreach (var recetaItem in recetaAll)
+            {
+                var categoriaCons = await _dbContext.Categorias.Where(c => c.Id == recetaItem.IdCategoria).FirstOrDefaultAsync();
+                var autorConsulta = await _dbContext.Usuarios.Where(u => u.Id == recetaItem.IdAutor).FirstOrDefaultAsync();
+                listaRecetasCategorias.Add(new RecetaDTO()
+                {
+                    Titulo = recetaItem.Titulo,
+                    Descripcion = recetaItem.Descripcion,
+                    Cuerpo = recetaItem.Cuerpo,
+                    Etiquetas = recetaItem.Etiquetas,
+                    Categoria = categoriaCons!.Nombre,
+                    Autor = autorConsulta!.NombreUsuario
+                });
+            }
+
+            return ResultAPI.Ok(listaRecetasCategorias);
+
         }
 
         public async Task<ResultAPI> GuardarReceta(RecetasCommandHandlerValidator validator)

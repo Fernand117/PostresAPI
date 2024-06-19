@@ -9,5 +9,6 @@ namespace Postres.Funciones.Recetas
         Task<ResultAPI> GuardarReceta(RecetasCommandHandlerValidator validator);
         Task<ResultAPI> ActualizarReceta(RecetasCommandHandlerValidator validator, string nombre);
         Task<ResultAPI> EliminarReceta(string nombre);
+        Task<ResultAPI> GetRecetaWithCategoria();
     }
 }
