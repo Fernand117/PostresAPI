@@ -1,0 +1,32 @@
+﻿GET http://localhost:47972/api/Categorias
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2024.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+content-length: 0
+
+###
+
+GET http://localhost:47972/api/Categorias/lista/categorias
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2024.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+content-length: 0
+
+###
+
+GET http://localhost:47972/api/categorias/lista/categorias
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2024.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+content-length: 0
+
+###
+
+GET http://localhost:47972/api/categorias/lista/categorias
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2024.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+content-length: 0
+
+###
+
