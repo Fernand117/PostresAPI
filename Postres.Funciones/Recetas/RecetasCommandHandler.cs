@@ -69,6 +69,8 @@ namespace Postres.Funciones.Recetas
             List<RecetaDTO> listaRecetasCategorias = new List<RecetaDTO>();
             var recetaAll = await _dbContext.Recetas.ToListAsync();
 
+            if (recetaAll.Count == 0) return ResultAPI.Ok("No hay recetas aún.");
+            
             foreach (var recetaItem in recetaAll)
             {
                 var categoriaCons = await _dbContext.Categorias.Where(c => c.Id == recetaItem.IdCategoria).FirstOrDefaultAsync();
