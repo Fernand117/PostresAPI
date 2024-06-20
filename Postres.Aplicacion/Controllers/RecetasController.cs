@@ -30,6 +30,13 @@ namespace Postres.Aplicacion.Controllers
             return new OkObjectResult(result);
         }
 
+        [HttpGet("lista/recetas")]
+        public async Task<IActionResult> GetAllRecetasWithCategoriaAutor()
+        {
+            var result = await _recetasCommand.GetRecetaWithCategoria();
+            return new OkObjectResult(result);
+        }
+        
         [HttpGet("nombre/{nombre}")]
         public async Task<IActionResult> GetByName(string name)
         {
