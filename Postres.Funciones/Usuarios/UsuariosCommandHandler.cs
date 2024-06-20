@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Postres.Domain;
+using Postres.Domain.DTO;
 using Postres.Domain.Usuarios;
 using Postres.Infraestructura.APIServices;
 
@@ -46,7 +47,24 @@ namespace Postres.Funciones.Usuarios
 
             if (usuarioLog == null) return ResultAPI.Ok("Usuario o contraseña incorrectos");
 
-            return ResultAPI.Ok(usuarioLog, "Usuario autenticado.");
+            var datosUsuario = await _postresDbContext.DatosUsuarios.Where(u => u.IdUsuario == usuarioLog.Id).FirstOrDefaultAsync();
+
+            UsuarioDTO usuarioDTO = new UsuarioDTO()
+            {
+                NombreUsuario = usuarioLog.NombreUsuario,
+                Correo = usuarioLog.Correo,
+                Password = usuarioLog.Password,
+                Nombre = datosUsuario!.Nombre,
+                Paterno = datosUsuario!.Paterno,
+                Materno = datosUsuario!.Materno,
+                FotoPerfil = datosUsuario!.FotoPerfil,
+                FotoPortada = datosUsuario!.FotoPortada,
+                FechaNacimiento = datosUsuario!.FechaNacimiento,
+                IdUsuario = usuarioLog.Id,
+                Id = datosUsuario!.Id
+            };
+
+            return ResultAPI.Ok(usuarioDTO, "Usuario autenticado.");
         }
 
         public async Task<ResultAPI> SaveUsuario(UsuariosCommandHandlerValidator usuario)
