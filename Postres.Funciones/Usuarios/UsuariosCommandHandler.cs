@@ -36,9 +36,10 @@ namespace Postres.Funciones.Usuarios
             return ResultAPI.Ok(usuarios, "Lista de usuarios.");
         }
 
-        public Task<ResultAPI> GetUsersByName(string usuario)
+        public async Task<ResultAPI> GetUsersByName(string usuario)
         {
-            throw new NotImplementedException();
+            var usuarioCon = await _postresDbContext.Usuarios.Where(u => u.NombreUsuario == usuario).FirstOrDefaultAsync();
+            return ResultAPI.Ok(usuarioCon, "Lista de usuarios.");
         }
 
         public async Task<ResultAPI> Login(UsuariosCommandHandlerValidator usuario)
