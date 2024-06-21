@@ -27,7 +27,7 @@ namespace Postres.Funciones.Recetas
             receta.Etiquetas = validator.Etiquetas;
             receta.IdAutor = validator.IdAutor;
             receta.IdCategoria = validator.IdCategoria;
-            
+
             _dbContext.Update(receta);
             await _dbContext.SaveChangesAsync();
 
@@ -49,16 +49,16 @@ namespace Postres.Funciones.Recetas
         public async Task<ResultAPI> GetListRecetas()
         {
             var listaRecetas = await _dbContext.Recetas.ToListAsync();
-            
+
             if (listaRecetas == null) return ResultAPI.Ok("No se encontró ninguna receta");
-            
+
             return ResultAPI.Ok(listaRecetas, "Lista de recetas");
         }
 
         public async Task<ResultAPI> GetRecetaByName(string name)
         {
             var receta = await _dbContext.Recetas.Where(r => r.Titulo == name).FirstOrDefaultAsync();
-            
+
             if (receta == null) return ResultAPI.Ok($"No se encontró ninguna receta {name}");
 
             return ResultAPI.Ok(receta, "Receta encontrada");
@@ -69,13 +69,8 @@ namespace Postres.Funciones.Recetas
             List<RecetaDTO> listaRecetasCategorias = new List<RecetaDTO>();
             var recetaAll = await _dbContext.Recetas.ToListAsync();
 
-<<<<<<< HEAD
-            if (recetaAll == null) return ResultAPI.Ok("No hay recetas");
-
-=======
             if (recetaAll.Count == 0) return ResultAPI.Ok("No hay recetas aún.");
-            
->>>>>>> master
+
             foreach (var recetaItem in recetaAll)
             {
                 var categoriaCons = await _dbContext.Categorias.Where(c => c.Id == recetaItem.IdCategoria).FirstOrDefaultAsync();
@@ -96,7 +91,7 @@ namespace Postres.Funciones.Recetas
 
         public async Task<ResultAPI> GuardarReceta(RecetasCommandHandlerValidator validator)
         {
-            var receta = new Receta() 
+            var receta = new Receta()
             {
                 Id = new Guid(),
                 Titulo = validator.Titulo,
